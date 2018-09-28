@@ -1,0 +1,23 @@
+.nav-item {
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 500px;
+    cursor: default;
+
+    &:hover {
+      transform: translate(0, -8px);
+      box-shadow: 0 20px 20px rgba(0, 0, 0, .16)
+    }
+  }
+
+  .wrapper {
+      padding: 10px;
+  }
+
+  p.description {
+    border:1px solid lightgrey;
+    border-radius:4px;
+    padding: 5px;
+  }
+  
+
+

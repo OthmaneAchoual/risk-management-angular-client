@@ -1,0 +1,19 @@
+.list-container {
+    padding: 0 5px;
+    background-color: #104585;
+    color: #fff;
+}
+.mat-nav-list a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.actions-container {
+    display:flex;
+    justify-content:space-around;
+    overflow: hidden;
+}
+
+button:disabled {
+    opacity: 0.70;
+}

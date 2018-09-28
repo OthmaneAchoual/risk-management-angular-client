@@ -1,0 +1,30 @@
+<!-- <ng-container *ngIf="(location$ | async) as location"> -->
+<mat-card>
+  <mat-card-title>
+    <h2>Location Detail</h2>
+  </mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+        <strong>Code : </strong>{{ location.code }}
+      </mat-list-item>
+      <mat-list-item>
+        <strong>Title : </strong>{{ location.title }}
+      </mat-list-item>
+      <mat-list-item>
+        <strong>Description : </strong>{{ location.description }}
+      </mat-list-item>
+      <!-- <mat-list-item *ngIf="(root$ | async) as root">
+        <strong>Root Location : </strong>{{ root.code }} - {{ root.title }}
+      </mat-list-item> -->
+      <mat-list-item *ngIf="location.root">
+        <strong>Root Location : </strong>{{ location.root.code }} - {{ location.root.title }}
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- <button mat-raised-button color="accent">Edit</button>
+      <button mat-raised-button color="warn" (click)="deleteLocation(location.ID)">Delete</button> -->
+  </mat-card-actions>
+</mat-card>
+<!-- </ng-container> -->

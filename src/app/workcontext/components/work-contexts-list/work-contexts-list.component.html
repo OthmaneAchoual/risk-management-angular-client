@@ -1,0 +1,55 @@
+<div class="list-container">
+
+
+        <mat-form-field style="width:100%;">
+          <input #wcInput type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn()" (optionSelected)="onSelect($event)">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{ option.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button style="margin-top:5px;width:100%;" mat-raised-button color="accent" (click)="openAddWorkContextDialog()" [disabled]="!(loggedIn | async)">
+          + Add Workcontext
+        </button>
+
+    <!-- <mat-nav-list>
+      <mat-list-item *ngFor="let context of contexts | async">
+
+        <a class="navigation-link" [routerLink]="['/workcontexts', context.ID]">
+            <span class="navigation-link-title">{{context.name}}</span>
+        </a>
+
+      </mat-list-item>
+    </mat-nav-list> -->
+
+    <!-- <a routerLink="/workcontexts/add">+ Add Workcontext</a> -->
+
+    <ng-container *ngIf="(current$ | async) as current">
+      <mat-card style="width:100%;">
+        <mat-card-title>
+          <h4 style="font-weight:bold;">Overview</h4>
+        </mat-card-title>
+        <mat-card-content>
+            <p>
+                <strong>Name : </strong>
+                <br /> {{ current.name }}
+            </p>
+            <p>
+                    <strong>Code : </strong>
+                    <br/> {{ current.code }}
+            </p>
+                <p>
+                    <strong>Description : </strong>
+                  <br /><span [innerHTML]="current.short_description | safeHtml"></span>
+                </p>
+        </mat-card-content>
+        <div class="actions-container">
+              <button (click)="navigate(current.ID)"><mat-icon>visibility</mat-icon></button>
+              <button (click)="edit(current)" [disabled]="!(loggedIn | async)"><mat-icon>edit</mat-icon></button>
+              <button (click)="delete(current)" [disabled]="!(loggedIn | async)"><mat-icon>delete</mat-icon></button>
+        </div>
+      </mat-card>
+    </ng-container>
+   
+</div>

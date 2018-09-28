@@ -1,0 +1,146 @@
+<ng-container *ngIf="(context$ | async) as context">
+    <div class="wrapper">
+        <mat-card class="">
+            <mat-card-title style="color:#3f51b5;">Workcontext Details</mat-card-title>
+            <mat-card-content fxLayout="column">
+                <p>
+                    <strong>Name : </strong> {{ context.name }}
+                </p>
+                <p>
+                        <strong>Code : </strong> {{ context.code }}
+                </p>
+                    <!-- <p *ngIf="(type$ | async) as type">
+                        <strong>Type : </strong> {{ type.choice }}
+                    </p> -->
+
+                    
+                    
+                <h4 style="color:#faa531">Full Description</h4>
+                <p class="description" [innerHTML]="context.full_description | safeHtml"></p>
+                <h4 style="color:#faa531">Short Description</h4>
+                <p class="description" [innerHTML]="context.short_description | safeHtml"></p>
+                
+                <mat-accordion>
+
+                        <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <h4>Types</h4></mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <mat-nav-list dense>
+                                        <ng-container *ngFor="let type of types$ | async">
+                                                <mat-list-item (click)="displayChoice(type)">
+                                                        <!-- <a matLine [routerLink]="['/choices', type.ID]">{{ type.choice }}</a> -->
+                                                        <div matLine>{{ type.choice }}</div>
+                                                    </mat-list-item>
+                                                    <mat-divider [inset]="true"></mat-divider>
+                                        </ng-container>
+                                    </mat-nav-list>
+                            </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h4>Risks</h4></mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list dense>
+                                <ng-container *ngFor="let risk of risks$ | async">
+                                        <mat-list-item (click)="displayRisk(risk)">
+                                                <!-- <a matLine [routerLink]="['/risks', risk.ID]">{{ risk.title }}</a> -->
+                                                <div matLine>{{ risk.title }}</div>
+                                            </mat-list-item>
+                                            <mat-divider [inset]="true"></mat-divider>
+                                </ng-container>
+                            </mat-nav-list>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h4>Agents</h4></mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list dense>
+                                <ng-container *ngFor="let agent of agents$ | async">
+                                        <mat-list-item (click)="displayAgent(agent)">
+                                                <!-- <a matLine [routerLink]="['/staff', agent.ID]">{{ agent.lastname }}, {{ agent.firstname }}</a> -->
+                                                <a matLine>{{ agent.lastname }}, {{ agent.firstname }}</a>
+                                            </mat-list-item>
+                                            <mat-divider [inset]="true"></mat-divider>
+                                </ng-container>
+                               
+                            </mat-nav-list>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h4>Documents</h4></mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list dense>
+                                <ng-container *ngFor="let doc of docs$ | async">
+                                        <mat-list-item (click)="displayDocument(doc)">
+                                            <div matLine>{{ doc.title }} - {{ doc.code }}</div>
+                                        </mat-list-item>
+                                        <mat-divider [inset]="true"></mat-divider>
+                                </ng-container>
+                               
+                            </mat-nav-list>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h4>Locations</h4></mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list dense>
+                                <ng-container *ngFor="let loc of locs$ | async">
+                                        <mat-list-item (click)="displayLocation(loc)">
+                                            <div matLine>{{ loc.title }} - {{ loc.code }}</div>
+                                        </mat-list-item>
+                                        <mat-divider [inset]="true"></mat-divider>
+                                </ng-container>
+                               
+                            </mat-nav-list>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h4>Equipments</h4></mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list dense>
+                                <ng-container *ngFor="let eq of eqs$ | async">
+                                        <mat-list-item (click)="displayEquipment(eq)">
+                                            <div matLine>{{ eq.title }} - {{ eq.code }}</div>
+                                        </mat-list-item>
+                                        <mat-divider [inset]="true"></mat-divider>
+                                </ng-container>
+                               
+                            </mat-nav-list>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h4>Contexts</h4></mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list dense>
+                                <ng-container *ngFor="let ctx of relatedContexts$ | async">
+                                        <mat-list-item (click)="displayContext(ctx)">
+                                                <!-- <a matLine [routerLink]="['/workcontexts', ctx.ID]">{{ ctx.name }}</a> -->
+                                                <div matLine>{{ ctx.name }}</div>
+                                            </mat-list-item>
+                                            <mat-divider [inset]="true"></mat-divider>
+                                </ng-container>
+                            </mat-nav-list>
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <!-- <button type="button" class="btn btn-primary">
+                    Bootstrap Button
+                </button> -->
+            </mat-card-content>
+                    <!-- <button mat-raised-button color="warn" (click)="delete(context)">Delete</button> -->
+        </mat-card>
+    </div>
+</ng-container>
+

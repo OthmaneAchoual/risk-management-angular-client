@@ -1,0 +1,106 @@
+<mat-sidenav-container class="app-sidenav-container">
+
+    <mat-sidenav #sidenav class="app-sidenav mat-elevation-z10" 
+        [opened]="true" 
+        [mode]="'side'">
+
+      <div class="mat-elevation-z2">
+          <mat-toolbar color="accent" style="background-color:#faa531">
+              <div class="brand-toolbar" fxLayout="row" fxLayoutAlign="start center">
+                <img class="logo-image" src="http://www.issep.be/wp-content/themes/issep/images/issep_logo_145px.jpg">
+                  <a class="logo-text" href="/">ISSeP</a>
+                </div>
+          </mat-toolbar>
+      </div>
+      <app-work-contexts-list></app-work-contexts-list>
+    </mat-sidenav>
+  
+    <div class="app-sidenav-content">
+      <mat-toolbar color="primary">
+  
+        <button mat-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      
+        <span>Risk Manager</span>
+      
+        <span class="example-spacer"></span>
+      
+        <!-- <div id="navigation">
+            <a mat-button class="link-button" routerLink="/risks">Risks</a>
+            <a mat-button class="link-button" routerLink="/staff">Staff</a>
+            <a mat-button class="link-button" routerLink="/equipment">Safety equipment</a>
+            <a mat-button class="link-button" routerLink="/documents">Documents</a>
+            <a mat-button class="link-button" routerLink="/locations">Locations</a>
+            <a mat-button class="link-button" routerLink="/choices">Choices</a>
+           
+    
+            <a mat-button [routerLink]="['/']">
+              <mat-icon>home</mat-icon>
+            </a>
+        </div> -->
+
+        <span style="color:white;padding: 0 20px;">{{ (sessionInfo | async)?.user.fullName }}</span>
+        
+        <button mat-icon-button [matMenuTriggerFor]="submenu">
+          <mat-icon>settings</mat-icon>
+        </button>
+        <mat-menu #submenu>
+          <button mat-menu-item *ngIf="!(loggedIn | async)" (click)="login()">
+            <mat-icon style="color:green;">file_upload</mat-icon>
+            <span>Login</span>
+          </button>
+          <button mat-menu-item *ngIf="loggedIn | async" (click)="logout()">
+            <mat-icon style="color:red;">file_download</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+
+
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="navigate('workcontexts')">
+                  <mat-icon>build</mat-icon>
+                  <span>Work contexts</span>
+                </button>
+            <button mat-menu-item (click)="navigate('risks')">
+              <mat-icon>warning</mat-icon>
+              <span>Risks</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="navigate('staff')">
+              <mat-icon>group</mat-icon>
+              <span>Staff</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="navigate('equipment')">
+              <mat-icon>security</mat-icon>
+              <span>Safety Equipment</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="navigate('documents')">
+                <mat-icon>folder</mat-icon>
+                <span>Documents</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item (click)="navigate('locations')">
+                <mat-icon>room</mat-icon>
+                <span>Locations</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item (click)="navigate('choices')">
+                <mat-icon>tune</mat-icon>
+                <span>Choices</span>
+              </button>
+          </mat-menu>
+      
+      </mat-toolbar>
+      
+      <!-- <mat-spinner></mat-spinner> -->
+      <perfect-scrollbar>
+          <router-outlet></router-outlet>
+      </perfect-scrollbar>
+    </div>
+  </mat-sidenav-container>

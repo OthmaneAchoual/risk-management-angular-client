@@ -1,0 +1,20 @@
+<!-- <ng-container *ngIf="(person$$ | async) as user"> -->
+    <div class="wrapper">
+                <mat-card>
+            <mat-card-title>User Details</mat-card-title>
+            <mat-card-content>
+              <p>Firstame: {{ user.firstname }}</p>
+              <p>Lastname: {{ user.lastname }}</p>
+              <p>Email: {{ user.email }}</p>
+              <p>Phone: {{ user.phone }}</p>
+              <p>Managed By: <ng-container *ngIf="(manager$ | async) as manager">{{ manager.lastname }}, {{ manager.firstname }}</ng-container></p>
+            </mat-card-content>
+
+            <!-- <button mat-raised-button color="warn" (click)="deleteUser(user)">Delete</button>
+            <button mat-raised-button color="accent" (click)="edit(user.ID)">Edit</button> -->
+
+        </mat-card>
+    </div>
+<!-- </ng-container> -->
+
+

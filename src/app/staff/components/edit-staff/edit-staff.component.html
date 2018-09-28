@@ -1,0 +1,63 @@
+<mat-card>
+    <mat-card-title>Edit Staff Member</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="staffForm" class="example-form">
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Firstname" formControlName="firstname" [errorStateMatcher]="matcher">
+              <mat-error *ngIf="staffForm.get('firstname').hasError('pattern') && !staffForm.get('firstname').hasError('required')">
+                  Please enter a valid name (a-z A-Z)
+                </mat-error>
+                <mat-error *ngIf="staffForm.get('firstname').hasError('required')">
+                  Firstname is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Lastname" formControlName="lastname" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="staffForm.get('lastname').hasError('pattern') && !staffForm.get('lastname').hasError('required')">
+                    Please enter a valid name (a-z A-Z)
+                  </mat-error>
+                  <mat-error *ngIf="staffForm.get('lastname').hasError('required')">
+                    Lastname is <strong>required</strong>
+                  </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Email" formControlName="email" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="staffForm.get('email').hasError('email') && !staffForm.get('email').hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="staffForm.get('email').hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Phone" formControlName="phone" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="staffForm.get('phone').hasError('pattern') && !staffForm.get('phone').hasError('required')">
+                  Please enter a valid phone number
+                </mat-error>
+                <mat-error *ngIf="staffForm.get('phone').hasError('required')">
+                  Phone number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                  <mat-select placeholder="Managed By" formControlName="manager">
+                    <mat-option *ngFor="let agent of staff$ | async" [value]="agent.ID">
+                      {{ agent.lastname }}, {{ agent.firstname }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+          </form>
+    </mat-card-content>
+  <mat-card-actions>
+      <button mat-raised-button class="mat-accent" color="primary" [disabled]="staffForm.invalid" (click)="edit()">Edit</button>
+      <button mat-raised-button class="mat-cancel" (click)="cancel()">Cancel</button>
+  </mat-card-actions>
+</mat-card>
+      
+      
+

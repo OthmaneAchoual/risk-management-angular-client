@@ -1,0 +1,8 @@
+ <mat-card class="mat-card mat-card mat-card">
+    <mat-card-title _ngcontent-c15="" class="mat-card-title mat-card-title mat-card-title">{{ risk.title }}</mat-card-title>
+    <mat-card-subtitle _ngcontent-c15="" class="mat-card-subtitle mat-card-subtitle mat-card-subtitle">{{ risk.reference }}</mat-card-subtitle>
+    <mat-card-content _ngcontent-c15="" class="mat-card-content mat-card-content mat-card-content">
+      <p _ngcontent-c15="" [innerHTML]="risk.description | safeHtml"></p>
+    </mat-card-content>
+    <a [routerLink]="['/risks', risk.ID]" class="mat-raised-button mat-primary" color="primary">Details</a>
+   </mat-card>

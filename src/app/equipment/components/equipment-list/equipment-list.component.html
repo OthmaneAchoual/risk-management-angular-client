@@ -1,0 +1,54 @@
+<!-- 
+ <mat-card *ngFor="let piece of equipment | async" class="mat-card mat-card mat-card">
+    <mat-card-title _ngcontent-c15="" class="mat-card-title mat-card-title mat-card-title">Title: {{ piece.title }}</mat-card-title>
+    <mat-card-subtitle _ngcontent-c15="" class="mat-card-subtitle mat-card-subtitle mat-card-subtitle">Code: {{ piece.code }}</mat-card-subtitle>
+    <a [routerLink]="['/equipment', piece.ID]" class="mat-raised-button mat-primary" color="primary">Details</a>
+    </mat-card> -->
+
+
+<mat-card>
+<mat-card-title>
+    <h2>Equipment List</h2>
+</mat-card-title>
+<mat-card-content>
+
+        <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+              </mat-form-field>
+
+<mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+        <mat-cell *matCellDef="let piece">{{ piece.title }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="code">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Code</mat-header-cell>
+            <mat-cell *matCellDef="let piece">{{ piece.code }}</mat-cell>
+        </ng-container>
+    <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+            <mat-cell *matCellDef="let piece">
+                    <button mat-button (click)="details(piece)">
+                        <mat-icon _ngcontent-c79="" class="mat-icon material-icons" role="img" aria-hidden="true">visibility</mat-icon>
+                    </button>
+                    <button mat-button (click)="edit(piece)" [disabled]="!(loggedIn | async)">
+                        <mat-icon _ngcontent-c79="" class="mat-icon material-icons" role="img" aria-hidden="true">border_color</mat-icon>
+                    </button>
+                    <button mat-button (click)="delete(piece)" [disabled]="!(loggedIn | async)">
+                            <mat-icon _ngcontent-c79="" class="mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
+                        </button>
+            </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator #paginator
+                [pageSize]="5"
+                [pageSizeOptions]="[2, 5, 10]"
+                [showFirstLastButtons]="true">
+</mat-paginator>
+</mat-card-content>
+</mat-card>
+
+<button mat-raised-button color="accent" (click)="displayAddDialog()" [disabled]="!(loggedIn | async)">+ Add Equipment</button>

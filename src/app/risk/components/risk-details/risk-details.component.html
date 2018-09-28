@@ -1,0 +1,37 @@
+<!-- <ng-container *ngIf="(risk$$ | async) as risk; else spinner"> -->
+        <mat-card>
+            <mat-card-title>Risk Details</mat-card-title>
+            <mat-card-content>
+                <mat-list>
+                        <mat-list-item>
+                            <strong>Risk Title : </strong>{{ risk.title }}        
+                            </mat-list-item>
+                    <mat-list-item>
+                        <strong>Risk Reference : </strong>{{ risk.reference }}     
+                    </mat-list-item>
+                    <mat-list-item *ngIf="risk.type">
+                            <strong>Risk Type : </strong>{{ risk.type.label }}     
+                        </mat-list-item>
+                        <mat-list-item *ngIf="(root$ | async) as root">
+                                <strong>Root risk : </strong>{{ root.title }} - {{ root.reference }}     
+                            </mat-list-item>
+                    <mat-list-item>
+                            <h4>Description :</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <p [innerHTML]="risk.description | safeHtml"></p>        
+                    </mat-list-item>
+                </mat-list>
+                
+            </mat-card-content>
+
+            <!-- <button mat-raised-button color="warn" (click)="deleteRisk(risk)">Delete</button>
+            <button mat-raised-button color="accent" (click)="editRisk(risk)">Edit</button> -->
+
+            <button mat-raised-button color="accent" (click)="close()">Close</button>
+        </mat-card>
+<!-- </ng-container> -->
+
+<ng-template #spinner>
+    <mat-spinner></mat-spinner>
+</ng-template>

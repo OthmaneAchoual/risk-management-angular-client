@@ -1,0 +1,18 @@
+<!-- <ng-container *ngIf="(choice$$ | async) as choice"> -->
+<ng-container>
+  <mat-card>
+    <mat-card-title>
+      <h2>Choice details</h2>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>
+          Label: {{ choice.label }}
+        </mat-list-item>
+        <mat-list-item>
+          Category: {{ choice.category }}
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

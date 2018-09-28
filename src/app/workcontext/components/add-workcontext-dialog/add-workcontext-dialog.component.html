@@ -1,0 +1,172 @@
+<perfect-scrollbar>
+    <mat-card>
+        <mat-card-title>
+          <h2>New work context</h2>
+        </mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="wcForm" class="example-container">
+                <mat-form-field>
+                    <mat-label>Code</mat-label>
+                  <input matInput formControlName="code">
+                  <mat-error *ngIf="wcForm.get('code').hasError('required')">Code is required</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                  <input matInput formControlName="name" [errorStateMatcher]="matcher">
+                  <mat-error *ngIf="wcForm.get('name').hasError('required')">Name is required</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select placeholder="Type" formControlName="typeIds" multiple>
+                      <mat-option *ngFor="let choice of choices | async" [value]="choice.ID">
+                        {{ choice.choice }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                <!-- <mat-form-field>
+                  <textarea #sd matInput placeholder="Short Description" formControlName="short_description" [froalaEditor]="sdOptions" [errorStateMatcher]="matcher"></textarea>
+                  <mat-error *ngIf="wcForm.get('short_description').hasError('required')">Short description is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <textarea #fd matInput placeholder="Full Description" formControlName="full_description" [froalaEditor]="fdOptions" [errorStateMatcher]="matcher"></textarea>
+                  <mat-error *ngIf="wcForm.get('full_description').hasError('required')">full description is required</mat-error>
+                </mat-form-field> -->
+
+                <h4>Short Description</h4>
+                <pell-editor (onChange)="handleShortDesc($event)"></pell-editor>
+
+                <h4>Full Description</h4>
+                <pell-editor (onChange)="handleFullDesc($event)"></pell-editor>
+
+                <fieldset>
+                  <legend>Staff</legend>
+                  <mat-form-field style="width:100%;">
+                      <input #staffInput type="text" placeholder="Search" aria-label="Number" matInput [formControl]="staffControl" [matAutocomplete]="staffAuto">
+                      <mat-autocomplete #staffAuto="matAutocomplete" [displayWith]="displayStaffFn()" (optionSelected)="onSelectStaff($event)">
+                        <mat-option *ngFor="let option of filteredStaffOptions | async" [value]="option">
+                          <mat-icon *ngIf="option.selected">done</mat-icon>
+                          {{ option.lastname }}, {{ option.firstname }}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field style="width:100%;">
+                        <mat-select placeholder="Staff" formControlName="userIds" multiple>
+                          <mat-option *ngFor="let person of staff | async" [value]="person.ID">
+                            {{ person.lastname }}, {{ person.firstname }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </fieldset>
+                
+
+                <fieldset>
+                  <legend>Risks</legend>
+                    <mat-form-field style="width:100%;">
+                        <input #wcInput type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn()" (optionSelected)="onSelect($event)">
+                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            <mat-icon *ngIf="option.selected">done</mat-icon>
+                            {{ option.title }}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                      <mat-form-field style="width:100%;">
+                          <mat-select placeholder="Risks" formControlName="riskIds" multiple>
+                            <mat-option *ngFor="let risk of risks | async" [value]="risk.ID">
+                              {{ risk.title }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Documents</legend>
+                  <mat-form-field style="width:100%;">
+                      <input #docInput type="text" placeholder="Search" aria-label="Number" matInput [formControl]="docControl" [matAutocomplete]="docsAuto">
+                      <mat-autocomplete #docsAuto="matAutocomplete" [displayWith]="displayDocsFn()" (optionSelected)="onSelectDoc($event)">
+                        <mat-option *ngFor="let option of filteredDocsOptions | async" [value]="option">
+                          <mat-icon *ngIf="option.selected">done</mat-icon>
+                          {{ option.title }} - {{ option.code }}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field style="width:100%;">
+                        <mat-select placeholder="Documents" formControlName="docIds" multiple>
+                          <mat-option *ngFor="let doc of docs | async" [value]="doc.ID">
+                            {{ doc.title }} - {{ doc.code }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Locations</legend>
+                  <mat-form-field style="width:100%;">
+                      <input #locInput type="text" placeholder="Search" aria-label="Number" matInput [formControl]="locControl" [matAutocomplete]="locsAuto">
+                      <mat-autocomplete #locsAuto="matAutocomplete" [displayWith]="displayLocsFn()" (optionSelected)="onSelectLoc($event)">
+                        <mat-option *ngFor="let option of filteredLocsOptions | async" [value]="option">
+                          <mat-icon *ngIf="option.selected">done</mat-icon>
+                          {{ option.title }} - {{ option.code }}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field style="width:100%;">
+                        <mat-select placeholder="Locations" formControlName="locIds" multiple>
+                          <mat-option *ngFor="let loc of locs | async" [value]="loc.ID">
+                            {{ loc.title }} - {{ loc.code }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Equipments</legend>
+                  <mat-form-field style="width:100%;">
+                      <input #eqInput type="text" placeholder="Search" aria-label="Number" matInput [formControl]="eqControl" [matAutocomplete]="eqsAuto">
+                      <mat-autocomplete #eqsAuto="matAutocomplete" [displayWith]="displayEqsFn()" (optionSelected)="onSelectEq($event)">
+                        <mat-option *ngFor="let option of filteredEqsOptions | async" [value]="option">
+                          <mat-icon *ngIf="option.selected">done</mat-icon>
+                          {{ option.title }} - {{ option.code }}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field style="width:100%;">
+                        <mat-select placeholder="Equipments" formControlName="eqIds" multiple>
+                          <mat-option *ngFor="let eq of eqs | async" [value]="eq.ID">
+                            {{ eq.title }} - {{ eq.code }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </fieldset>
+                  
+
+                <fieldset>
+                  <legend>Workcontexts</legend>
+                  <mat-form-field style="width:100%;">
+                      <input #workInput type="text" placeholder="Search" aria-label="Number" matInput [formControl]="workControl" [matAutocomplete]="workAuto">
+                      <mat-autocomplete #workAuto="matAutocomplete" [displayWith]="displayWorkFn()" (optionSelected)="onSelectWork($event)">
+                        <mat-option *ngFor="let option of filteredWorkOptions | async" [value]="option">
+                          <mat-icon *ngIf="option.selected">done</mat-icon>
+                          {{ option.name }} - {{ option.code }}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field style="width:100%;">
+                        <mat-select placeholder="Related Workcontexts" formControlName="wcIds" multiple>
+                          <mat-option *ngFor="let wc of wcs | async" [value]="wc.ID">
+                            {{ wc.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </fieldset>
+                  
+              </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" [disabled]="wcForm.invalid" (click)="submit()">Add</button>
+          <button mat-raised-button color="accent" (click)="dismiss()">Cancel</button>
+        </mat-card-actions>
+      </mat-card>
+</perfect-scrollbar>
+  

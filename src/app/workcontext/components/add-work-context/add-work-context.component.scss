@@ -1,0 +1,11 @@
+.example-container {
+    position: absolute;
+    top: 100px;
+    left: 300px;
+    display: flex;
+    flex-direction: column;
+}
+  
+.example-container > * {
+    width: 500px;
+}

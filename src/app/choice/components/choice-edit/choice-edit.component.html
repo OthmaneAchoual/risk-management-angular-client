@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-title>
+      <h2>Edit Choice</h2>
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="choiceForm" class="example-container">
+        <mat-form-field>
+          <input matInput placeholder="Label" formControlName="choice">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Choice Type" formControlName="category">
+            <mat-option *ngFor="let type of types" [value]="type">
+              {{ type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  
+      <button mat-raised-button color="primary" [disabled]="choiceForm.invalid" (click)="editChoice()">Edit</button>
+      <button mat-raised-button color="accent" (click)="cancel()">Cancel</button>
+  
+  </mat-card>

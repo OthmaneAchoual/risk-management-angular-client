@@ -1,0 +1,99 @@
+<!-- <ul *ngFor="let choice of choices | async">
+  <li>{{ choice.choice }}</li>
+  <li>{{ choice.category }}</li>
+  <a [routerLink]="['/choices', choice.ID]">Details</a>
+</ul> -->
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          Risk choices
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+
+
+
+
+    <div *ngFor="let choice of riskChoices | async">
+            <mat-card>
+            <mat-card-title>{{ choice.label }}</mat-card-title>
+            <mat-card-subtitle>{{ choice.category }}</mat-card-subtitle>
+            <!-- <a [routerLink]="['/choices', choice.ID]" class="mat-raised-button mat-primary">Details</a> -->
+            <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="displayDetail(choice)">Details</button>
+                    <button mat-raised-button color="accent" (click)="editChoice(choice)" [disabled]="!(loggedIn | async)">Edit</button>
+                    <button mat-raised-button color="warn" (click)="deleteChoice(choice)" [disabled]="!(loggedIn | async)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
+      </div>
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            Workcontext choices
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let choice of workContextChoices | async">
+          <mat-card>
+            <mat-card-title>{{ choice.label }}</mat-card-title>
+            <mat-card-subtitle>{{ choice.category }}</mat-card-subtitle>
+            <!-- <a [routerLink]="['/choices', choice.ID]" class="mat-raised-button mat-primary">Details</a> -->
+            <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="displayDetail(choice)">Details</button>
+                    <button mat-raised-button color="accent" (click)="editChoice(choice)" [disabled]="!(loggedIn | async)">Edit</button>
+                    <button mat-raised-button color="warn" (click)="deleteChoice(choice)" [disabled]="!(loggedIn | async)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
+        </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+              Equipment choices
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngFor="let choice of equipmentChoices | async">
+            <mat-card>
+            <mat-card-title>{{ choice.label }}</mat-card-title>
+            <mat-card-subtitle>{{ choice.category }}</mat-card-subtitle>
+            <!-- <a [routerLink]="['/choices', choice.ID]" class="mat-raised-button mat-primary">Details</a> -->
+            <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="displayDetail(choice)">Details</button>
+                    <button mat-raised-button color="accent" (click)="editChoice(choice)" [disabled]="!(loggedIn | async)">Edit</button>
+                    <button mat-raised-button color="warn" (click)="deleteChoice(choice)" [disabled]="!(loggedIn | async)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
+          </div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+              Document choices
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngFor="let choice of documentChoices | async">
+            <mat-card>
+            <mat-card-title>{{ choice.label }}</mat-card-title>
+            <mat-card-subtitle>{{ choice.category }}</mat-card-subtitle>
+            <!-- <a [routerLink]="['/choices', choice.ID]" class="mat-raised-button mat-primary">Details</a> -->
+            <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="displayDetail(choice)">Details</button>
+                    <button mat-raised-button color="accent" (click)="editChoice(choice)" [disabled]="!(loggedIn | async)">Edit</button>
+                    <button mat-raised-button color="warn" (click)="deleteChoice(choice)" [disabled]="!(loggedIn | async)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
+          </div>
+      </mat-expansion-panel>
+</mat-accordion>
+
+
+  <br>
+  <button mat-raised-button color="accent" (click)="openAddDialog()" [disabled]="!(loggedIn | async)">+ Add Choice</button>
+  <!-- <a routerLink="/choices/add" class="mat-raised-button mat-accent" color="primary">+ Add Choice</a> -->

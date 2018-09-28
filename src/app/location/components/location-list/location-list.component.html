@@ -1,0 +1,56 @@
+<!-- <ul *ngFor="let location of locations | async">
+  <li>{{ location.code }}</li>
+  <li>{{ location.title }}</li>
+  <li>{{ location.description }}</li>
+  <li>
+    <a [routerLink]="['/locations', location.ID]">Details</a>
+  </li>
+</ul>
+<a routerLink="/locations/add">+ Add location</a> -->
+
+<mat-card>
+    <mat-card-title>
+        <h2>Locations List</h2>
+    </mat-card-title>
+    <mat-card-content>
+
+            <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                  </mat-form-field>
+    <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+            <mat-cell *matCellDef="let location">{{ location.title }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="code">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Code</mat-header-cell>
+                <mat-cell *matCellDef="let location">{{ location.code }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                <mat-cell *matCellDef="let location">
+                        <button mat-button (click)="details(location)">
+                            <mat-icon _ngcontent-c79="" class="mat-icon material-icons" role="img" aria-hidden="true">visibility</mat-icon>
+                        </button>
+                        <button mat-button (click)="edit(location)" [disabled]="!(loggedIn | async)">
+                            <mat-icon _ngcontent-c79="" class="mat-icon material-icons" role="img" aria-hidden="true">border_color</mat-icon>
+                        </button>
+                        <button mat-button (click)="delete(location)" [disabled]="!(loggedIn | async)">
+                                <mat-icon _ngcontent-c79="" class="mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
+                        </button>
+                </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator
+                    [pageSize]="5"
+                    [pageSizeOptions]="[2, 5, 10]"
+                    [showFirstLastButtons]="true">
+    </mat-paginator>
+    </mat-card-content>
+
+    </mat-card>
+
+    <button mat-raised-button color="accent" (click)="displayAddDialog()" [disabled]="!(loggedIn | async)">+ Add Location</button>

@@ -1,0 +1,50 @@
+<mat-card>
+<mat-card-title>
+    <h2>Risks List</h2>
+</mat-card-title>
+<mat-card-content>
+
+        <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+              </mat-form-field>
+
+<mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+        <mat-cell *matCellDef="let risk">{{ risk.title }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="reference">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Reference</mat-header-cell>
+            <mat-cell *matCellDef="let risk">{{ risk.reference }}</mat-cell>
+        </ng-container>
+    <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+            <mat-cell *matCellDef="let risk">
+                    <button mat-button (click)="details(risk)">
+                        <mat-icon _ngcontent-c79="" class="mat-icon material-icons" role="img" aria-hidden="true">visibility</mat-icon>
+                    </button>
+                    <button mat-button (click)="edit(risk)" [disabled]="!(loggedIn | async)">
+                        <mat-icon _ngcontent-c79="" class="mat-icon material-icons" role="img" aria-hidden="true">border_color</mat-icon>
+                    </button>
+                    <button mat-button (click)="delete(risk)" [disabled]="!(loggedIn | async)">
+                            <mat-icon _ngcontent-c79="" class="mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
+                        </button>
+            </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator #paginator
+                [pageSize]="5"
+                [pageSizeOptions]="[2, 5, 10]"
+                [showFirstLastButtons]="true">
+</mat-paginator>
+</mat-card-content>
+
+
+
+</mat-card>
+
+    <button mat-raised-button color="accent" (click)="displayAddDialog()" [disabled]="!(loggedIn | async)">+ Add Risk</button>
+

@@ -1,0 +1,36 @@
+<!-- <ng-container *ngIf="(equipment$ | async) as equipment"> -->
+    <mat-card>
+      <mat-card-title>
+        <h2>Equipment details</h2>
+      </mat-card-title>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <strong>Code : </strong> {{ equipment.code }}
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Title : </strong >{{ equipment.title }}
+          </mat-list-item>
+          <mat-list-item>
+              <strong>Type : </strong><span *ngIf="(type$ | async) as type">{{ type.choice }}</span>
+            </mat-list-item>
+          <mat-list-item>
+            <strong>Is Epc : </strong><span *ngIf="equipment.is_epc; else neg"><mat-icon class="check">done</mat-icon></span>
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Training required : </strong><span *ngIf="equipment.training; else neg"><mat-icon class="check">done</mat-icon></span>
+          </mat-list-item>
+        </mat-list>
+        <!-- <img *ngIf="equipment.image" [src]="equipment.image"> -->
+        <img width="300" *ngIf="imageUrl" [src]="imageUrl">
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- <button mat-raised-button color="accent" (click)="editEquipment(equipment.ID)">Edit</button>
+        <button mat-raised-button color="warn" (click)="deleteEquipment(equipment.ID)">Delete</button> -->
+      </mat-card-actions>
+    </mat-card>
+  <!-- </ng-container> -->
+
+  <ng-template #neg>
+    <mat-icon class="cross">clear</mat-icon>
+  </ng-template>

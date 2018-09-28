@@ -1,0 +1,106 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.debug {
+    color: red;
+}
+
+.ps-content{
+    margin: 20px;
+}
+
+mat-card {
+  margin: 15px 0px 15px 0px;
+}
+
+.mat-raised-button.mat-primary {
+    background-color: #3f51b5;
+    text-decoration: none;
+}
+
+.mat-cancel{
+    background-color: #cdcdcd;
+}
+.mat-raised-button.mat-valid {
+    background-color: #0fb049;
+    text-decoration: none;
+    color:#fff;
+}
+.mat-valid, .mat-accent {
+    text-decoration: none !important;
+    // color:#fff;
+}
+
+a.mat-accent {
+    color: white;
+}
+
+.mat-card.staff {
+    display: inline-block;
+    float: left;
+}
+
+.mat-raised-button.mat-accent {
+    background-color: #faa531;
+}
+
+.mat-raised-button.mat-warn {
+    background-color: #e51a35;
+}
+
+.mat-cell .mat-button{
+    margin: 5px;
+    min-width: 36px;
+    padding: 0 0;
+}
+.mat-cell .mat-button .material-icons{
+    font-size: 20px;
+}
+
+.mat-header-cell{
+    font-size: 15px;
+    color: rgb(16, 69, 133);
+}
+
+.add-form{
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+#cdk-overlay-0 .mat-autocomplete-panel{
+    max-height: 486px;
+
+}
+
+#cdk-overlay-0 .mat-autocomplete-panel .mat-option-text{
+    color: #104585;
+    font-size: 14px;
+}
+
+.mat-form-field-label{
+  color: lightgrey;
+}
+
+.mat-focused .mat-form-field-label {
+    color: lightgrey;
+}
+
+.mat-dialog-container {
+    // background-color: #0fb049;
+    background-color: #f2eaebde;
+}
+
+// .mat-dialog-container .caption {
+//     color: #fff;
+// }
+
+// .mat-expansion-indicator::after {
+//     padding: 5px !important;
+//     border-width: 0 3px 3px 0 !important;
+// }
+
+button:disabled {
+    cursor: not-allowed !important;
+}
