@@ -6,9 +6,9 @@
     <mat-list>
       <mat-list-item><strong>Title : </strong>{{ document.title }}</mat-list-item>
       <mat-list-item><strong>Code : </strong>{{ document.code }}</mat-list-item>
-      <mat-list-item><strong>Category : <ng-container *ngIf="(category$ | async) as cat">{{ cat.choice }}</ng-container></strong></mat-list-item>
-      <mat-list-item *ngIf="document.file && document.file !== ''"><button mat-raised-button (click)="download(document)">Download document</button></mat-list-item>
-      <mat-list-item *ngIf="document.file && document.file.endsWith('pdf')"><button mat-raised-button (click)="preview(document)">Preview</button></mat-list-item>
+      <mat-list-item><strong>Category : <ng-container *ngIf="(category$ | async) as cat">{{ cat.label }}</ng-container></strong></mat-list-item>
+      <mat-list-item *ngIf="document.filePath && document.filePath !== ''"><button mat-raised-button (click)="download(document)">Download document</button></mat-list-item>
+      <mat-list-item *ngIf="document.filePath && document.filePath.endsWith('pdf')"><button mat-raised-button (click)="preview(document)">Preview</button></mat-list-item>
     </mat-list>
   </mat-card-content>
   <mat-card-actions>

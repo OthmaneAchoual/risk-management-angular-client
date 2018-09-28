@@ -57,10 +57,10 @@ export class DocumentAddComponent implements OnInit, AfterViewInit {
     if (this.loaded) {
       const input = new FormData();
       const fileToUpload = this.file.files[0];
-      input.append(fileToUpload.name, fileToUpload);
+      input.append('file', fileToUpload);
       console.log(input);
       this.service.uploadDocument(input).pipe(
-        switchMap(file => this.service.addDocument({ ...this.documentForm.value, file }))
+        switchMap(filePath => this.service.addDocument({ ...this.documentForm.value, filePath }))
       ).subscribe(
         doc => this.dialogRef.close(doc),
         err => {

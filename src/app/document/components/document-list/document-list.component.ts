@@ -45,8 +45,9 @@ export class DocumentListComponent implements OnInit, AfterViewInit {
     this.dataSource.sortingDataAccessor = (data, sortHeaderId) => data[sortHeaderId].toLocaleLowerCase();
 
     this.documents = this.service.documents.pipe(
-      map(docs => docs.map(doc => ({ ...doc, category$: doc.category && this.choiceService.getChoice(doc.category.__KEY)})))
+      map(docs => docs.map(doc => ({ ...doc, category$: doc.category && this.choiceService.getChoice(doc.category.ID)})))
     );
+
     this.documents.subscribe(
       data => this.dataSource.data = data
     );

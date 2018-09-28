@@ -15,7 +15,7 @@
       <mat-form-field  class="example-full-width">
         <mat-select placeholder="Category" formControlName="category">
           <mat-option *ngFor="let choice of choices$ | async" [value]="choice.ID">
-            {{ choice.choice }}
+            {{ choice.label }}
           </mat-option>
         </mat-select>
       </mat-form-field>

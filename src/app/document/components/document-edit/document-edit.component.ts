@@ -40,7 +40,7 @@ export class DocumentEditComponent implements OnInit, AfterViewInit {
     'code': new FormControl(this.document.code, [
       Validators.required
     ]),
-    'category': new FormControl((this.document.category && this.document.category.__KEY) || '', [
+    'category': new FormControl((this.document.category && this.document.category.ID) || '', [
       Validators.required
     ])
   });
@@ -64,9 +64,9 @@ export class DocumentEditComponent implements OnInit, AfterViewInit {
     if (this.loaded) {
       const input = new FormData();
       const fileToUpload = this.file.files[0];
-      input.append(fileToUpload.name, fileToUpload);
+      input.append('file', fileToUpload);
       this.service.uploadDocument(input).pipe(
-        switchMap(file => this.service.editDocument({ ...this.docForm.value, file }))
+        switchMap(filePath => this.service.editDocument({ ...this.docForm.value, filePath }))
       ).subscribe(
         doc => this.dialogRef.close(doc),
         err => {

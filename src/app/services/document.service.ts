@@ -55,13 +55,13 @@ export class DocumentService {
   }
 
   uploadDocument(formData) {
-    return this.http.post(`http://${host}:${port}/api/uploaddocument`, formData, {
+    return this.http.post(`http://${host}:${port}/api/document/upload`, formData, {
       responseType: 'text'
     });
   }
 
   downloadDocument(id) {
-    return this.http.get(`http://${host}:${port}/api/downloaddocument/${id}`, {
+    return this.http.get(`http://${host}:${port}/api/document/${id}/download`, {
       responseType: 'blob'
     });
   }

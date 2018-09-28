@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Document } from '../../../models/document';
 import { DocumentService } from '../../../services/document.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import * as FileSaver from 'file-saver';
+import { saveAs } from 'file-saver/FileSaver';
 import { PdfPreviewComponent } from '../pdf-preview/pdf-preview.component';
 import { ChoiceService } from '../../../services/choice.service';
 import { Choice } from '../../../models/choice';
@@ -26,19 +26,19 @@ export class DocumentDetailComponent implements OnInit {
   category$: Observable<Choice>;
 
   ngOnInit() {
-    this.category$ = this.document.category && this.choiceService.getChoice(this.document.category.__KEY);
+    this.category$ = this.document.category && this.choiceService.getChoice(this.document.category.ID);
   }
 
   close() {
     this.dialogRef.close(null);
   }
 
-  download(document) {
+  download(document: Document) {
     this.service.downloadDocument(document.ID).subscribe(
       data => {
-        console.log(data);
         const blob = new Blob([data]);
-        FileSaver.saveAs(blob, document.file.split('_')[1]);
+        const parts = document.filePath.split('/');
+        saveAs(blob, parts[parts.length - 1]);
       }
     );
   }
