@@ -1,11 +1,13 @@
+import { Choice } from './choice';
+
 export interface Equipment {
     ID: string;
     title: string;
     code: string;
     description: string;
-    type: any;
-    instructions: string[];
-    image: string; // link
-    is_epc: boolean;
+    type: Choice;
+    instructions?: string[];
+    imagePath?: string; // link
+    epc: boolean;
     training: boolean;
 }

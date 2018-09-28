@@ -31,8 +31,6 @@ export class EquipmentDetailComponent implements OnInit {
     this.service.downloadImage(this.equipment.ID).subscribe(
       blob => this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))
     );
-
-    this.type$ = this.choiceService.getChoice(this.equipment.type.__KEY);
   }
 
 }

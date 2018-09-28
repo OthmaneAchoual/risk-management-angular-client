@@ -41,7 +41,7 @@ export class EquipmentAddComponent implements OnInit {
     'type': new FormControl('', [
       Validators.required
     ]),
-    'is_epc': new FormControl(false, [
+    'epc': new FormControl(false, [
       Validators.required
     ]),
     'training': new FormControl(false, [
@@ -62,8 +62,8 @@ export class EquipmentAddComponent implements OnInit {
     const input = new FormData();
     input.append('file', fileToUpload);
     this.service.upload(input).pipe(
-      switchMap(url => {
-        const object = { ...this.equipmentForm.value, url };
+      switchMap(imagePath => {
+        const object = { ...this.equipmentForm.value, imagePath };
         return this.service.addEquipment(object);
       })
     ).subscribe(

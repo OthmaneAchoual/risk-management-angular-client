@@ -12,10 +12,10 @@
             <strong>Title : </strong >{{ equipment.title }}
           </mat-list-item>
           <mat-list-item>
-              <strong>Type : </strong><span *ngIf="(type$ | async) as type">{{ type.choice }}</span>
+              <strong>Type : </strong><span *ngIf="equipment.type">{{ equipment.type.label }}</span>
             </mat-list-item>
           <mat-list-item>
-            <strong>Is Epc : </strong><span *ngIf="equipment.is_epc; else neg"><mat-icon class="check">done</mat-icon></span>
+            <strong>Is Epc : </strong><span *ngIf="equipment.epc; else neg"><mat-icon class="check">done</mat-icon></span>
           </mat-list-item>
           <mat-list-item>
             <strong>Training required : </strong><span *ngIf="equipment.training; else neg"><mat-icon class="check">done</mat-icon></span>

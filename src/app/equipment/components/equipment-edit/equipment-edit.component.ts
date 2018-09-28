@@ -43,10 +43,10 @@ export class EquipmentEditComponent implements OnInit {
     'title': new FormControl(this.equipment.title, [
       Validators.required
     ]),
-    'type': new FormControl('', [
+    'type': new FormControl(this.equipment.type.ID, [
       Validators.required
     ]),
-    'is_epc': new FormControl(this.equipment.is_epc, [
+    'epc': new FormControl(this.equipment.epc, [
       Validators.required
     ]),
     'training': new FormControl(this.equipment.training, [
@@ -67,7 +67,7 @@ export class EquipmentEditComponent implements OnInit {
     this.choices.subscribe(
       choices => {
         if  (choices.length > 0) {
-          this.equipmentForm.get('type').setValue(choices.find(choice => choice.ID === this.equipment.type.__KEY).ID);
+          this.equipmentForm.get('type').setValue(choices.find(choice => choice.ID === this.equipment.type.ID).ID);
         }
       }
     );
@@ -81,8 +81,8 @@ export class EquipmentEditComponent implements OnInit {
     input.append('file', fileToUpload);
 
     const update = this.loaded ? this.service.upload(input).pipe(
-      switchMap(url => this.service.updateEquipment({ ...this.equipmentForm.value, ID: this.equipment.ID, url }))
-    ) : this.service.updateEquipment({ ...this.equipmentForm.value, ID: this.equipment.ID, url: '' });
+      switchMap(imagePath => this.service.updateEquipment({ ...this.equipmentForm.value, ID: this.equipment.ID, imagePath }))
+    ) : this.service.updateEquipment({ ...this.equipmentForm.value, ID: this.equipment.ID, imagePath: this.equipment.imagePath });
 
     update.subscribe(
       res => this.dialogRef.close(res),

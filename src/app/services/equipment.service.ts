@@ -52,13 +52,13 @@ export class EquipmentService {
   }
 
   upload(input) {
-    return this.http.post(`http://${host}:${port}/api/image`, input, {
+    return this.http.post(`http://${host}:${port}/api/equipment/upload`, input, {
       responseType: 'text'
     });
   }
 
   downloadImage(id) {
-    return this.http.get(`http://${host}:${port}/api/downloadimage/${id}`, {
+    return this.http.get(`http://${host}:${port}/api/equipment/${id}/download`, {
       responseType: 'blob'
     });
   }
