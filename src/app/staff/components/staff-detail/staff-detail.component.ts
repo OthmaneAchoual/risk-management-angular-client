@@ -21,7 +21,7 @@ export class StaffDetailComponent implements OnInit {
   person$$: Promise<User>;
 
   ngOnInit() {
-    this.manager$ = this.user.managed_by && this.service.getById(this.user.managed_by.__KEY);
+    this.manager$ = this.user.manager && this.service.getById(this.user.manager.ID);
   }
 
 }

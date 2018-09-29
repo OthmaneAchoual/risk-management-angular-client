@@ -7,7 +7,7 @@
               <p>Lastname: {{ user.lastname }}</p>
               <p>Email: {{ user.email }}</p>
               <p>Phone: {{ user.phone }}</p>
-              <p>Managed By: <ng-container *ngIf="(manager$ | async) as manager">{{ manager.lastname }}, {{ manager.firstname }}</ng-container></p>
+              <p>Managed By: <ng-container *ngIf="user.manager">{{ user.manager.lastname }}, {{ user.manager.firstname }}</ng-container></p>
             </mat-card-content>
 
             <!-- <button mat-raised-button color="warn" (click)="deleteUser(user)">Delete</button>

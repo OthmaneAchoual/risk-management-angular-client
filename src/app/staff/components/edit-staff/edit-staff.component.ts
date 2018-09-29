@@ -65,7 +65,7 @@ export class EditStaffComponent implements OnInit {
       map(staff => staff.filter(agent => agent.ID !== this.data.ID))
     );
     this.staff$.subscribe(
-      staff => this.data.managed_by && this.staffForm.get('manager').setValue(this.data.managed_by.__KEY)
+      staff => this.data.manager && this.staffForm.get('manager').setValue(this.data.manager.ID)
     );
     this.service.loadAll(this.error);
   }

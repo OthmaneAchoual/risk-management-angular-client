@@ -5,5 +5,5 @@ export interface User {
     lastname: string;
     email: string;
     phone: string;
-    managed_by: any;
+    manager: any;
 }
