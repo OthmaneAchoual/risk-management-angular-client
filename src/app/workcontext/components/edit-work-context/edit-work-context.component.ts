@@ -73,7 +73,7 @@ export class EditWorkContextComponent implements OnInit, AfterViewInit {
   docs: Observable<Document[]>;
   locs: Observable<Location[]>;
   eqs: Observable<Equipment[]>;
-  wcs: Observable<WorkContext[]>;
+  // wcs: Observable<WorkContext[]>;
 
   myControl = new FormControl();
   staffControl = new FormControl();
@@ -87,29 +87,9 @@ export class EditWorkContextComponent implements OnInit, AfterViewInit {
   filteredDocsOptions: Observable<any[]>;
   filteredLocsOptions: Observable<any[]>;
   filteredEqsOptions: Observable<any[]>;
-  filteredWorkOptions: Observable<any[]>;
+  // filteredWorkOptions: Observable<any[]>;
 
   error = new Subject<HttpErrorResponse>();
-
-  public sdOptions = {
-    placeholderText: 'Short description',
-    heightMin: 100,
-    events: {
-      'froalaEditor.focus' : (e, editor) => {
-        this.wcForm.get('short_description').markAsTouched();
-      }
-    }
-  };
-
-  public fdOptions = {
-    placeholderText: 'Full description',
-    heightMin: 190,
-    events: {
-      'froalaEditor.focus' : (e, editor) => {
-        this.wcForm.get('full_description').markAsTouched();
-      }
-    }
-  };
 
   matcher = new MyErrorStateMatcher();
   wcForm = new FormGroup({
@@ -119,7 +99,7 @@ export class EditWorkContextComponent implements OnInit, AfterViewInit {
     'name': new FormControl(this.curr.name, [
       Validators.required
     ]),
-    'typeIds': new FormControl([], [
+    'types': new FormControl([], [
       Validators.required
     ]),
     'short_description': new FormControl(this.curr.short_description, [
@@ -128,34 +108,34 @@ export class EditWorkContextComponent implements OnInit, AfterViewInit {
     'full_description': new FormControl(this.curr.full_description, [
       Validators.required
     ]),
-    'riskIds': new FormControl([], [
+    'risks': new FormControl([], [
       Validators.required
     ]),
-    'userIds': new FormControl([], [
+    'users': new FormControl([], [
       Validators.required
     ]),
-    'wcIds': new FormControl([]),
-    'docIds': new FormControl([], [
+    // 'wcIds': new FormControl([]),
+    'documents': new FormControl([], [
       Validators.required
     ]),
-    'locIds': new FormControl([], [
+    'locations': new FormControl([], [
       Validators.required
     ]),
-    'eqIds': new FormControl([], [
+    'equipments': new FormControl([], [
       Validators.required
     ])
   });
 
   ngOnInit() {
-    this.filteredWorkOptions = merge(this.workControl.valueChanges, this.workRefresh).pipe(
-      startWith<string | WorkContext>(''),
-      map(val => typeof val === 'string' ? val : val.code),
-      switchMap(val => this.wcs.pipe(
-        map(ctxs => ctxs.filter(ctx => ctx.name.startsWith(val) || ctx.code.startsWith(val))),
-        map(ctxs => ctxs.map(ctx => ({ ...ctx, selected: (this.wcForm.get('wcIds').value as Array<string>).includes(ctx.ID)})))
-      )
-    )
-  );
+  //   this.filteredWorkOptions = merge(this.workControl.valueChanges, this.workRefresh).pipe(
+  //     startWith<string | WorkContext>(''),
+  //     map(val => typeof val === 'string' ? val : val.code),
+  //     switchMap(val => this.wcs.pipe(
+  //       map(ctxs => ctxs.filter(ctx => ctx.name.startsWith(val) || ctx.code.startsWith(val))),
+  //       map(ctxs => ctxs.map(ctx => ({ ...ctx, selected: (this.wcForm.get('wcIds').value as Array<string>).includes(ctx.ID)})))
+  //     )
+  //   )
+  // );
 
     this.filteredDocsOptions = merge(this.docControl.valueChanges, this.docRefresh).pipe(
       startWith<string | Document>(''),
@@ -231,10 +211,10 @@ this.filteredEqsOptions = merge(this.eqControl.valueChanges, this.eqRefresh).pip
     this.risks = this.riskService.risks;
     this.riskService.loadAll();
 
-    this.wcs = this.service.contexts.pipe(
-      map(ctxs => ctxs.filter(ctx => ctx.ID !== this.curr.ID))
-    );
-    this.service.loadAll();
+    // this.wcs = this.service.contexts.pipe(
+    //   map(ctxs => ctxs.filter(ctx => ctx.ID !== this.curr.ID))
+    // );
+    // this.service.loadAll();
 
     this.staff = this.staffService.staff;
     this.staffService.loadAll(this.error);

@@ -16,7 +16,7 @@
                   <mat-error *ngIf="wcForm.get('name').hasError('required')">Name is required</mat-error>
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-select placeholder="Type" formControlName="typeIds" multiple>
+                    <mat-select placeholder="Type" formControlName="types" multiple>
                       <mat-option *ngFor="let choice of choices | async" [value]="choice.ID">
                         {{ choice.label }}
                       </mat-option>
@@ -51,7 +51,7 @@
                       </mat-autocomplete>
                     </mat-form-field>
                     <mat-form-field style="width:100%;">
-                        <mat-select placeholder="Staff" formControlName="userIds" multiple>
+                        <mat-select placeholder="Staff" formControlName="users" multiple>
                           <mat-option *ngFor="let person of staff | async" [value]="person.ID">
                             {{ person.lastname }}, {{ person.firstname }}
                           </mat-option>
@@ -72,7 +72,7 @@
                         </mat-autocomplete>
                       </mat-form-field>
                       <mat-form-field style="width:100%;">
-                          <mat-select placeholder="Risks" formControlName="riskIds" multiple>
+                          <mat-select placeholder="Risks" formControlName="risks" multiple>
                             <mat-option *ngFor="let risk of risks | async" [value]="risk.ID">
                               {{ risk.title }}
                             </mat-option>
@@ -92,7 +92,7 @@
                       </mat-autocomplete>
                     </mat-form-field>
                     <mat-form-field style="width:100%;">
-                        <mat-select placeholder="Documents" formControlName="docIds" multiple>
+                        <mat-select placeholder="Documents" formControlName="documents" multiple>
                           <mat-option *ngFor="let doc of docs | async" [value]="doc.ID">
                             {{ doc.title }} - {{ doc.code }}
                           </mat-option>
@@ -112,7 +112,7 @@
                       </mat-autocomplete>
                     </mat-form-field>
                     <mat-form-field style="width:100%;">
-                        <mat-select placeholder="Locations" formControlName="locIds" multiple>
+                        <mat-select placeholder="Locations" formControlName="locations" multiple>
                           <mat-option *ngFor="let loc of locs | async" [value]="loc.ID">
                             {{ loc.title }} - {{ loc.code }}
                           </mat-option>
@@ -132,7 +132,7 @@
                       </mat-autocomplete>
                     </mat-form-field>
                     <mat-form-field style="width:100%;">
-                        <mat-select placeholder="Equipments" formControlName="eqIds" multiple>
+                        <mat-select placeholder="Equipments" formControlName="equipments" multiple>
                           <mat-option *ngFor="let eq of eqs | async" [value]="eq.ID">
                             {{ eq.title }} - {{ eq.code }}
                           </mat-option>
@@ -141,7 +141,7 @@
                 </fieldset>
                   
 
-                <fieldset>
+                <!-- <fieldset>
                   <legend>Workcontexts</legend>
                   <mat-form-field style="width:100%;">
                       <input #workInput type="text" placeholder="Search" aria-label="Number" matInput [formControl]="workControl" [matAutocomplete]="workAuto">
@@ -159,7 +159,7 @@
                           </mat-option>
                         </mat-select>
                       </mat-form-field>
-                </fieldset>
+                </fieldset> -->
                   
               </form>
         </mat-card-content>

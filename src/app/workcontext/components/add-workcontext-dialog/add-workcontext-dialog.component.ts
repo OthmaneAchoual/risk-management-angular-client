@@ -34,7 +34,7 @@ export class AddWorkcontextDialogComponent implements OnInit {
   locs: Observable<Location[]>;
   eqs: Observable<Equipment[]>;
   choices: Observable<Choice[]>;
-  wcs: Observable<WorkContext[]>;
+  // wcs: Observable<WorkContext[]>;
   error$ = new Subject<HttpErrorResponse>();
 
   refresh = new Subject<any>();
@@ -66,7 +66,7 @@ export class AddWorkcontextDialogComponent implements OnInit {
     'name': new FormControl('', [
       Validators.required
     ]),
-    'typeIds': new FormControl([], [
+    'types': new FormControl([], [
       Validators.required
     ]),
     'short_description': new FormControl('', [
@@ -75,20 +75,20 @@ export class AddWorkcontextDialogComponent implements OnInit {
     'full_description': new FormControl('', [
       Validators.required
     ]),
-    'riskIds': new FormControl([], [
+    'risks': new FormControl([], [
       Validators.required
     ]),
-    'userIds': new FormControl([], [
+    'users': new FormControl([], [
       Validators.required
     ]),
-    'wcIds': new FormControl([]),
-    'docIds': new FormControl([], [
+    // 'wcIds': new FormControl([]),
+    'documents': new FormControl([], [
       Validators.required
     ]),
-    'locIds': new FormControl([], [
+    'locations': new FormControl([], [
       Validators.required
     ]),
-    'eqIds': new FormControl([], [
+    'equipments': new FormControl([], [
       Validators.required
     ])
   });
@@ -107,27 +107,7 @@ export class AddWorkcontextDialogComponent implements OnInit {
   filteredDocsOptions: Observable<any[]>;
   filteredLocsOptions: Observable<any[]>;
   filteredEqsOptions: Observable<any[]>;
-  filteredWorkOptions: Observable<any[]>;
-
-  public sdOptions = {
-    placeholderText: 'Short description',
-    heightMin: 100,
-    events: {
-      'froalaEditor.focus' : (e, editor) => {
-        this.wcForm.get('short_description').markAsTouched();
-      }
-    }
-  };
-
-  public fdOptions = {
-    placeholderText: 'Full description',
-    heightMin: 190,
-    events: {
-      'froalaEditor.focus' : (e, editor) => {
-        this.wcForm.get('full_description').markAsTouched();
-      }
-    }
-  };
+  // filteredWorkOptions: Observable<any[]>;
 
   constructor(
     private service: WorkContextService,
@@ -142,15 +122,15 @@ export class AddWorkcontextDialogComponent implements OnInit {
 
   ngOnInit() {
 
-    this.filteredWorkOptions = merge(this.workControl.valueChanges, this.workRefresh).pipe(
-      startWith<string | WorkContext>(''),
-      map(val => typeof val === 'string' ? val : val.code),
-      switchMap(val => this.wcs.pipe(
-        map(ctxs => ctxs.filter(ctx => ctx.name.startsWith(val) || ctx.code.startsWith(val))),
-        map(ctxs => ctxs.map(ctx => ({ ...ctx, selected: (this.wcForm.get('wcIds').value as Array<string>).includes(ctx.ID)})))
-      )
-    )
-  );
+  //   this.filteredWorkOptions = merge(this.workControl.valueChanges, this.workRefresh).pipe(
+  //     startWith<string | WorkContext>(''),
+  //     map(val => typeof val === 'string' ? val : val.code),
+  //     switchMap(val => this.wcs.pipe(
+  //       map(ctxs => ctxs.filter(ctx => ctx.name.startsWith(val) || ctx.code.startsWith(val))),
+  //       map(ctxs => ctxs.map(ctx => ({ ...ctx, selected: (this.wcForm.get('wcIds').value as Array<string>).includes(ctx.ID)})))
+  //     )
+  //   )
+  // );
 
     this.filteredDocsOptions = merge(this.docControl.valueChanges, this.docRefresh).pipe(
       startWith<string | Document>(''),
@@ -202,8 +182,8 @@ this.filteredEqsOptions = merge(this.eqControl.valueChanges, this.eqRefresh).pip
     )
   );
 
-    this.wcs = this.service.contexts;
-    this.service.loadAll();
+    // this.wcs = this.service.contexts;
+    // this.service.loadAll();
 
     this.staff = this.staffService.staff;
     this.staffService.loadAll(this.error$);
