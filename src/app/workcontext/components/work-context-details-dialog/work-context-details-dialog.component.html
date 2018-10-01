@@ -17,9 +17,9 @@
 
 
                 <h4 style="color:#faa531">Full Description</h4>
-                <p class="description" [innerHTML]="context.full_description | safeHtml"></p>
+                <p class="description" [innerHTML]="context.fullDescription | safeHtml"></p>
                 <h4 style="color:#faa531">Short Description</h4>
-                <p class="description" [innerHTML]="context.short_description | safeHtml"></p>
+                <p class="description" [innerHTML]="context.shortDescription | safeHtml"></p>
 
                 <mat-accordion>
 
@@ -30,10 +30,10 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <mat-nav-list dense>
-                            <ng-container *ngFor="let type of types$ | async">
+                            <ng-container *ngFor="let type of context.types">
                                 <mat-list-item (click)="displayChoice(type)">
                                     <!-- <a matLine [routerLink]="['/choices', type.ID]">{{ type.choice }}</a> -->
-                                    <div matLine>{{ type.choice }}</div>
+                                    <div matLine>{{ type.label }}</div>
                                 </mat-list-item>
                                 <mat-divider [inset]="true"></mat-divider>
                             </ng-container>
@@ -47,7 +47,7 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <mat-nav-list dense>
-                            <ng-container *ngFor="let risk of risks$ | async">
+                            <ng-container *ngFor="let risk of context.risks">
                                 <mat-list-item (click)="displayRisk(risk)">
                                     <!-- <a matLine [routerLink]="['/risks', risk.ID]">{{ risk.title }}</a> -->
                                     <div matLine>{{ risk.title }}</div>
@@ -64,7 +64,7 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <mat-nav-list dense>
-                            <ng-container *ngFor="let agent of agents$ | async">
+                            <ng-container *ngFor="let agent of context.users">
                                 <mat-list-item (click)="displayAgent(agent)">
                                     <!-- <a matLine [routerLink]="['/staff', agent.ID]">{{ agent.lastname }}, {{ agent.firstname }}</a> -->
                                     <a matLine>{{ agent.lastname }}, {{ agent.firstname }}</a>
@@ -82,7 +82,7 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <mat-nav-list dense>
-                            <ng-container *ngFor="let doc of docs$ | async">
+                            <ng-container *ngFor="let doc of context.documents">
                                 <mat-list-item (click)="displayDocument(doc)">
                                     <div matLine>{{ doc.title }} - {{ doc.code }}</div>
                                 </mat-list-item>
@@ -99,7 +99,7 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <mat-nav-list dense>
-                            <ng-container *ngFor="let loc of locs$ | async">
+                            <ng-container *ngFor="let loc of context.locations">
                                 <mat-list-item (click)="displayLocation(loc)">
                                     <div matLine>{{ loc.title }} - {{ loc.code }}</div>
                                 </mat-list-item>
@@ -116,7 +116,7 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <mat-nav-list dense>
-                            <ng-container *ngFor="let eq of eqs$ | async">
+                            <ng-container *ngFor="let eq of context.equipments">
                                 <mat-list-item (click)="displayEquipment(eq)">
                                     <div matLine>{{ eq.title }} - {{ eq.code }}</div>
                                 </mat-list-item>
@@ -126,7 +126,7 @@
                         </mat-nav-list>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel>
+                    <!-- <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <h4>Contexts</h4>
@@ -134,14 +134,14 @@
                         </mat-expansion-panel-header>
                         <mat-nav-list dense>
                             <ng-container *ngFor="let ctx of relatedContexts$ | async">
-                                <mat-list-item (click)="goToContext(ctx.ID)">
+                                <mat-list-item (click)="goToContext(ctx.ID)"> -->
                                     <!-- <a matLine [routerLink]="['/workcontexts', ctx.ID]">{{ ctx.name }}</a> -->
-                                    <div matLine>{{ ctx.name }}</div>
+                                    <!-- <div matLine>{{ ctx.name }}</div>
                                 </mat-list-item>
                                 <mat-divider [inset]="true"></mat-divider>
                             </ng-container>
                         </mat-nav-list>
-                    </mat-expansion-panel>
+                    </mat-expansion-panel> -->
                 </mat-accordion>
                 <!-- <button type="button" class="btn btn-primary">
                   Bootstrap Button

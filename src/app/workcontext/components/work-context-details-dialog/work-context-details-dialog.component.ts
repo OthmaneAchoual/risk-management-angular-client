@@ -57,23 +57,23 @@ export class WorkContextDetailsDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.relatedContexts$ = this.service.getContextsForContext(this.context.ID);
+    // this.relatedContexts$ = this.service.getContextsForContext(this.context.ID);
 
-    this.types$ = this.choiceService.getChoicesForContext(this.context.ID);
+    // this.types$ = this.choiceService.getChoicesForContext(this.context.ID);
 
-    this.risks$ = this.riskService.getRisksForContext(this.context.ID);
+    // this.risks$ = this.riskService.getRisksForContext(this.context.ID);
 
-    this.eqs$ = this.equipmentService.getEquipmentsForContext(this.context.ID);
+    // this.eqs$ = this.equipmentService.getEquipmentsForContext(this.context.ID);
 
-    this.agents$ = this.staffService.getAgentsForContext(this.context.ID);
+    // this.agents$ = this.staffService.getAgentsForContext(this.context.ID);
 
-    this.docs$ = this.documentService.getDocumentsForContext(this.context.ID).pipe(
-      map(docs => orderBy(docs, ['title'], ['desc']))
-    );
+    // this.docs$ = this.documentService.getDocumentsForContext(this.context.ID).pipe(
+    //   map(docs => orderBy(docs, ['title'], ['desc']))
+    // );
 
-    this.locs$ = this.locationService.getLocationsForContext(this.context.ID).pipe(
-      map(locs => orderBy(locs, ['title'], ['desc']))
-    );
+    // this.locs$ = this.locationService.getLocationsForContext(this.context.ID).pipe(
+    //   map(locs => orderBy(locs, ['title'], ['desc']))
+    // );
   }
 
   displayRisk(risk: Risk) {

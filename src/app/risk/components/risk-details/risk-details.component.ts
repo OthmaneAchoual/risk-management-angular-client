@@ -32,7 +32,7 @@ export class RiskDetailsComponent implements OnInit {
   loading = true;
 
   ngOnInit() {
-    this.root$ = this.risk.root && this.service.getById(this.risk.root.__KEY);
+    this.root$ = this.risk.root && this.service.getById(this.risk.root.ID);
   }
 
   deleteRisk(risk: Risk) {

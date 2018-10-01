@@ -6,5 +6,5 @@ export interface Risk {
     title: string;
     description: string;
     type: Choice;
-    root: any;
+    root?: Risk;
 }

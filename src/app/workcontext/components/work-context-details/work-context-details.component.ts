@@ -62,29 +62,29 @@ export class WorkContextDetailsComponent implements OnInit {
     this.context$ = this.route.params.pipe(
       switchMap(params => this.service.getContext(params.id))
     );
-    this.relatedContexts$ = this.context$.pipe(
-      switchMap(context => this.service.getContextsForContext(context.ID))
-    );
-    this.types$ = this.context$.pipe(
-      switchMap(context => this.choiceService.getChoicesForContext(context.ID))
-    );
-    this.risks$ = this.context$.pipe(
-      switchMap(context => this.riskService.getRisksForContext(context.ID))
-    );
-    this.agents$ = this.context$.pipe(
-      switchMap(context => this.staffService.getAgentsForContext(context.ID))
-    );
-    this.eqs$ = this.context$.pipe(
-      switchMap(context => this.equipmentService.getEquipmentsForContext(context.ID))
-    );
-    this.docs$ = this.context$.pipe(
-      switchMap(context => this.documentService.getDocumentsForContext(context.ID)),
-      map(docs => orderBy(docs, ['title'], ['desc']))
-    );
-    this.locs$ = this.context$.pipe(
-      switchMap(context => this.locationService.getLocationsForContext(context.ID)),
-      map(locs => orderBy(locs, ['title'], ['desc']))
-    );
+    // this.relatedContexts$ = this.context$.pipe(
+    //   switchMap(context => this.service.getContextsForContext(context.ID))
+    // );
+    // this.types$ = this.context$.pipe(
+    //   switchMap(context => this.choiceService.getChoicesForContext(context.ID))
+    // );
+    // this.risks$ = this.context$.pipe(
+    //   switchMap(context => this.riskService.getRisksForContext(context.ID))
+    // );
+    // this.agents$ = this.context$.pipe(
+    //   switchMap(context => this.staffService.getAgentsForContext(context.ID))
+    // );
+    // this.eqs$ = this.context$.pipe(
+    //   switchMap(context => this.equipmentService.getEquipmentsForContext(context.ID))
+    // );
+    // this.docs$ = this.context$.pipe(
+    //   switchMap(context => this.documentService.getDocumentsForContext(context.ID)),
+    //   map(docs => orderBy(docs, ['title'], ['desc']))
+    // );
+    // this.locs$ = this.context$.pipe(
+    //   switchMap(context => this.locationService.getLocationsForContext(context.ID)),
+    //   map(locs => orderBy(locs, ['title'], ['desc']))
+    // );
   }
 
   delete(context: WorkContext) {

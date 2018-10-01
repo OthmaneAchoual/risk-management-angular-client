@@ -55,7 +55,7 @@ export class RiskEditComponent implements OnInit, AfterViewInit {
       'description': new FormControl(this.data.description || '', [
         Validators.required
       ]),
-      'root': new FormControl(this.data.root ? this.data.root.__KEY : '', [])
+      'root': new FormControl(this.data.root ? this.data.root.ID : '', [])
     }
   );
 
