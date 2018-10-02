@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class SessionInterceptor implements HttpInterceptor {
   intercept (req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authReq = req.clone({
-      // withCredentials: true
+      withCredentials: true
     });
     return next.handle(authReq);
   }

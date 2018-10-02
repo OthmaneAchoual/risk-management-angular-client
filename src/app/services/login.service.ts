@@ -20,15 +20,15 @@ export class LoginService {
   _session = new Subject<any>();
 
   updateSession() {
-    // this.http.get<any>(`http://${host}:${port}/session`, {
-    //   withCredentials: true
-    // }).subscribe(
-    //   session => {
-    //     const guest = session.user.fullName === 'default guest';
-    //     this._loggedIn.next(!guest);
-    this._session.next({ user: { fullName: 'John Doe' } });
-    //   }
-    // );
+    this.http.get(`http://${host}:${port}/session/me`, {
+      withCredentials: true,
+      responseType: 'text'
+    }).subscribe(
+      fullName => {
+        this._loggedIn.next(fullName !== 'guest');
+        this._session.next({ user: { fullName }});
+      }
+    );
   }
 
   get loggedIn() {
@@ -43,32 +43,34 @@ export class LoginService {
     return this._session.asObservable();
   }
 
-  login(credentials) {
-    this._loggedIn.next(true);
-    this._failed.next(false);
-    this.updateSession();
-    // this.http.post(`http://${host}:${port}/login`, credentials).subscribe(
-    //   response => {
-    //     this._loggedIn.next(true);
-    //     this._failed.next(false);
-    //     this.updateSession();
-    //   },
-    //   response => {
-    //     console.log('erreur plutot :^)');
-    //     this._failed.next(true);
-    //   }
-    // );
+  login({username, password}) {
+    const body = new URLSearchParams();
+    body.append('username', username);
+    body.append('password', password);
+    console.log(body);
+    this.http.post(`http://${host}:${port}/login`, body.toString(), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).subscribe(
+      response => {
+        this._loggedIn.next(true);
+        this._failed.next(false);
+        this.updateSession();
+      },
+      response => {
+        console.log('erreur plutot :^)');
+        this._failed.next(true);
+      }
+    );
   }
 
   logout() {
-
-    this._loggedIn.next(false);
-    this.updateSession();
-    // this.http.post(`http://${host}:${port}/logout`, {}).subscribe(
-    //   response => {
-    //     this._loggedIn.next(false);
-    //     this.updateSession();
-    //   }
-    // );
+    this.http.post(`http://${host}:${port}/logout`, {}).subscribe(
+      response => {
+        this._loggedIn.next(false);
+        this.updateSession();
+      }
+    );
   }
 }
