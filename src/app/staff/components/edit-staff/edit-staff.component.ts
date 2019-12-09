@@ -1,12 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { User } from '../../../models/user';
-import { StaffService } from '../../../services/staff.service';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { StaffService } from '../../../services/staff.service';
+import { User } from '../../../models/user';
 import { LoginService } from '../../../services/login.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -65,7 +65,7 @@ export class EditStaffComponent implements OnInit {
       map(staff => staff.filter(agent => agent.ID !== this.data.ID))
     );
     this.staff$.subscribe(
-      staff => this.data.manager && this.staffForm.get('manager').setValue(this.data.manager.ID)
+      () => this.data.manager && this.staffForm.get('manager').setValue(this.data.manager.ID)
     );
     this.service.loadAll(this.error);
   }

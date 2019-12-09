@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/user';
 import { Observable, BehaviorSubject, Subject, of } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
+import { User } from '../models/user';
 import { config } from '../config';
 
 const { host, port } = config;

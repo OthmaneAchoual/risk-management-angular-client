@@ -32,9 +32,7 @@ export class LoginComponent implements OnInit {
     this.loggedIn = this.loginService.loggedIn;
     this.failedLogin = this.loginService.failed;
 
-    this.failedLogin.subscribe(
-      e => console.log(e)
-    );
+    this.failedLogin.subscribe(console.log);
 
     this.loggedIn.subscribe(
       loggedIn => loggedIn && this.dialogRef.close(null)

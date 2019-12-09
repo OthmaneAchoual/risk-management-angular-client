@@ -10,43 +10,43 @@ import { WorkContextsListComponent } from './workcontext/components/work-context
 import { AdminComponent } from './components/admin/admin.component';
 import { AppRoutingModule } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import {
+    PerfectScrollbarModule,
+    PERFECT_SCROLLBAR_CONFIG,
+    PerfectScrollbarConfigInterface
+} from 'ngx-perfect-scrollbar';
 import { ProviderModule } from './shared/provider.module';
-
 import { PellModule } from 'angular-pell';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
+    suppressScrollX: true
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    WorkContextsListComponent,
-    AdminComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    FormsModule,
-    FlexLayoutModule,
-    PerfectScrollbarModule,
-    AppRoutingModule,
-    ProviderModule.forRoot(),
-    PellModule
-  ],
-  providers: [
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
-  ],
-  bootstrap: [ AppComponent ]
+    declarations: [
+        AppComponent,
+        WorkContextsListComponent,
+        AdminComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        FormsModule,
+        FlexLayoutModule,
+        PerfectScrollbarModule,
+        AppRoutingModule,
+        ProviderModule.forRoot(),
+        PellModule
+    ],
+    providers: [
+        {
+            provide: PERFECT_SCROLLBAR_CONFIG,
+            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
